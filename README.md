@@ -1,3 +1,5 @@
+미니쉘 테스터 수정중.
+다른 테스터를 사용하세요.
 + 테스터기가 이상하다면 여러분이 맞습니다.
 + songbird_tester 레포지토리를 여러분의 과제 디렉토리 안에 넣어주세요.
 + place tester repository in your project dir.
