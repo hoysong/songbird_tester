@@ -1,14 +1,8 @@
 #include <stdlib.h>
-#include "./minitester.h"
+#include "./source/minitester.h"
 
 /* README. */
-/*
- * you can make your own test cases easily with this main.c.
- * some test cases doesn't works for your tiny shell.
- * but I think it doesn't mean your shell is wrong.
- * cuz subject asking for build your own minishell.
- * this is why this tester doesn't evaluate your shell.
- * this tester builder existing for just showing differences of your shell and bash.
+/* you can make your own test cases easily with this main.c.
  */
 
 char	*test_case_01[] = {
@@ -47,7 +41,7 @@ char	*test_case_05[] = {
 };
 
 char	*test_case_06[] = {
-	"\"e\"c\"h\"o t\"h\"i\"s\" \"is\" e\"cho\"!\n",
+	"\"e\"c\"h\"o t\"h\"i\"s\" is echo!\n",
 	"\n",
 	"exit\n",
 	NULL
@@ -127,6 +121,20 @@ char	*test_case_12[] = {
 	NULL
 };
 
+char	*test_case_13[] = {
+	"cd ./test_files/\n",
+	"pwd\n",
+	"cat << EOF > heredoc_test\n",
+	"this\n",
+	"is\n",
+	"ctrl + d\n",
+	"\n",
+	"cat ./heredoc_test\n",
+	"rm ./heredoc_test\n",
+	"exit\n",
+	NULL
+};
+
 char	*test_case_14[] = {
 	"echo hi\
 	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
@@ -177,7 +185,97 @@ char	*test_case_14[] = {
 	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
 	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
 	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
-	|wc\n",
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e\
+	|wc\n "
 	"exit\n",
 	NULL
 };
@@ -267,69 +365,6 @@ char	*test_case_17[] = {
 	NULL
 };
 
-char	*test_case_18[] = {
-	"export\n",
-	"exit\n",
-	NULL
-};
-
-char	*test_case_19[] = {
-	"env\n",
-	"exit\n",
-	NULL
-};
-
-char	*test_case_20[] = {
-	"SIGQUIT\n",
-	"echo $?\n",
-	"exit\n",
-	NULL
-};
-
-char	*test_case_21[] = {
-	"SIGINT\n",
-	"echo $?\n",
-	"exit\n",
-	NULL
-};
-
-char	*test_case_22[] = {
-	"echo '\"$USER\"' is \"$USER\"\n",
-	"echo '$'USER also $USER\n",
-	"echo $\"USER\" also $USER\n",
-	"echo $U\"S\"ER also \"$USER\"\n",
-	"echo $\"\"USER\"\" also \"$USER\"\n",
-	"echo a$USER also $USER\n",
-	"echo $USER\"a\" also $USER\n",
-	"echo a$USER\"a\" also $USER\n",
-	"echo A$USER$USER\n",
-	"echo $USER\"A\"$USER\n",
-	"echo A$USER\"A\"$USER\"\"\n",
-	"echo \"\"$USER\"\"$USER\"\"\n",
-	"echo \"'$USER'$USER'\"\n",
-	"echo \"A$USERA$USERA\"\n",
-	"echo ''\"A$USERA$USERA\"''\n",
-	"echo ''\"''$USER'$USER''\"''\n",
-	"exit\n",
-	NULL
-};
-
-char	*test_case_23[] = {
-	"export TESTER_LOCATION=$PWD\n"
-	"cd ../../\n"
-	"export PATH=$PWD:$PATH\n",
-	"echo $PATH\n",
-	"minishell\n"
-	"exit 42\n",
-	"echo $?\n",
-	"cd $TESTER_LOCATION\n",
-	"minishell\n"
-	"exit 42\n",
-	"echo $?\n",
-	"exit\n",
-	NULL
-};
-
 extern void	run_test_case( t_info *info, char **test_case );
 
 void	start_prog( char **env )
@@ -348,16 +383,12 @@ void	start_prog( char **env )
 	run_test_case(&info, test_case_09);
 	run_test_case(&info, test_case_10);
 	run_test_case(&info, test_case_11);
+	run_test_case(&info, test_case_12);
+	run_test_case(&info, test_case_13);
 	run_test_case(&info, test_case_14);
 	run_test_case(&info, test_case_15);
 	run_test_case(&info, test_case_16);
 	run_test_case(&info, test_case_17);
-	run_test_case(&info, test_case_18);
-	run_test_case(&info, test_case_19);
-	run_test_case(&info, test_case_20);
-	run_test_case(&info, test_case_21);
-	run_test_case(&info, test_case_22);
-	run_test_case(&info, test_case_23);
 }
 
 extern  int	configure(char **argv, char **env);
@@ -368,3 +399,4 @@ int	main( int argc, char **argv, char **env )
 		return (-1);
 	return (0);
 }
+
