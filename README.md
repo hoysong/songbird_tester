@@ -1,10 +1,7 @@
-미니쉘 테스터 수정중.
-다른 테스터를 사용하세요.
 + 테스터기가 이상하다면 여러분이 맞습니다.
 + songbird_tester 레포지토리를 여러분의 과제 디렉토리 안에 넣어주세요.
 + place tester repository in your project dir.
 # minishell_tester_builder
-![tester_01](https://github.com/user-attachments/assets/57f3bfee-a955-4ca7-9fee-2a22fd1d7bd8)
 + 미니쉘 테스터 빌더입니다.
 + this is minishell tester builder
 + 테스터 레포지토리를 과제 디렉토리 안에서 클론하면 됩니다.
