@@ -1,0 +1,4 @@
+NO ./test_map/texture/new_dot/North.xpm
+SO ./test_map/texture/new_dot/South.xpm
+WE ./test_map/texture/new_dot/West.xpm
+EA ./test_map/texture/new_dot/East.xpm

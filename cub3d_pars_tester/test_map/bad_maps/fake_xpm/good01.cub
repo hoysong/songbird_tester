@@ -1,0 +1,11 @@
+NO ./test_map/texture/dummy_xpm/line_dummy00.xpm
+SO ./test_map/texture/dummy_xpm/line_dummy01.xpm
+WE ./test_map/texture/dummy_xpm/line_dummy02.xpm
+EA ./test_map/texture/dummy_xpm/line_dummy03.xpm
+F 255,255,255
+C 255,255,255
+11111
+10001
+10N01
+10001
+11111

@@ -1,0 +1,13 @@
+NO ./test_map/texture/new_dot/North.xpm
+SO ./test_map/texture/new_dot/South.xpm
+WE ./test_map/texture/new_dot/West.xpm
+EA ./test_map/texture/new_dot/East.xpm
+F 255,255,255
+C 255,255,255
+0000000
+0111110
+0100010
+010N010
+0100010
+0111110
+0000000

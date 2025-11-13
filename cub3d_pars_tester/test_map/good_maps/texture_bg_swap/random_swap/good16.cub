@@ -1,0 +1,15 @@
+
+EA ./test_map/texture/new_dot/East.xpm
+
+C 0,0,255
+F 255,0,0
+
+WE ./test_map/texture/new_dot/West.xpm
+SO ./test_map/texture/new_dot/South.xpm
+NO ./test_map/texture/new_dot/North.xpm
+
+11111
+10001
+10N01
+10001
+11111
