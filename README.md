@@ -1,6 +1,13 @@
 + 테스터기가 이상하다면 여러분이 맞습니다.
 + songbird_tester 레포지토리를 여러분의 과제 디렉토리 안에 넣어주세요.
 + place tester repository in your project dir.
+
+# get_next_line tester
++ gnl 테스터는.. 안정적이지 못하니 다른 테스터를 권장합니다.
++ this tester is trash. use other tester.
++ get next line  tester 는 무한루프를 탈출하지 못합니다.
++ 이상하게 오래걸리는 테스트케이스가 있다면 get next line에서 무한루프가 발생한 것입니다.
+
 # minishell_tester_builder
 + 미니쉘 테스터 빌더입니다.
 + this is minishell tester builder
@@ -18,15 +25,9 @@
 + you can send signal with "SIGNAL\n", "SIGINT\n" to your minishell.
 + (see main.c)
 
-# get_next_line tester
-+ gnl 테스터는.. 안정적이지 못하니 다른 테스터를 권장합니다.
-+ this tester is trash. use other tester.
-+ get next line  tester 는 무한루프를 탈출하지 못합니다.
-+ 이상하게 오래걸리는 테스트케이스가 있다면 get next line에서 무한루프가 발생한 것입니다.
-
 # cub3D_pars_tester
 + cub3d 파싱 테스터입니다.
-+ 원한다면 test.sh 파일의 내용들을 수정하여 실행할 수 있습니다.
++ 원한다면 test.sh 파일을 수정하여 실행할 수 있습니다.
 + 파일 하단의 양식을 통해 테스트 파일의 위치를 수정할 수 있습니다.
 + normal_test를 실행하여 일반 테스트를 실행할 수 있습니다.
 + leak_test를 실행하여 누수 체크를 할 수 있습니다.
