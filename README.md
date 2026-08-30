@@ -1,36 +1,119 @@
-+ 테스터기가 이상하다면 여러분이 맞습니다.
-+ songbird_tester 레포지토리를 여러분의 과제 디렉토리 루트에 넣어주세요.
-+ place tester repository in your project root dir.
+# Songbird Tester
 
-# get_next_line tester
-+ gnl 테스터는.. 안정적이지 못하니 다른 테스터를 권장합니다.
-+ this tester is trash. use other tester.
-+ get next line  tester 는 무한루프를 탈출하지 못합니다.
-+ 이상하게 오래걸리는 테스트케이스가 있다면 get next line에서 무한루프가 발생한 것입니다.
+[English](./README.md) | [한국어](./README.ko.md)
 
-# minishell_tester_builder
-+ 미니쉘 테스터 빌더입니다.
-+ this is minishell tester builder
-+ 테스터 레포지토리를 과제 디렉토리 안에서 클론하면 됩니다.
-+ clone this repository in your project directory.
-+ main.c를 편집하여 원하는 입력을 보낼 수 있습니다.
-+ by modifying main.c can send input.
-+ main.c를 양식에 맞춰 작성한 후, bash compile.sh를 통해서 a.out 실행파일을 생성할 수 있습니다.
-+ after done modifying, type 'bash compils.sh' to make a.out executable file.
-+ bash와 minishell의 출력을 fd별로 출력합니다.
-+ this shows output of minishell and bash.
-+ bash는 대화형모드 옵션으로 실행됩니다.
-+ bash will execute with interactive mode.
-+ "SIGQUIT\n", "SIGINT\n"를 통해서 minishell에 시그널을 보낼 수 있습니다.
-+ you can send signal with "SIGNAL\n", "SIGINT\n" to your minishell.
-+ (see main.c)
+## Overview
 
-# cub3D_pars_tester
-+ cub3d 파싱 테스터입니다.
-+ 원한다면 test.sh 파일을 수정하여 실행할 수 있습니다.
-+ 파일 하단의 양식을 통해 테스트 파일의 위치를 수정할 수 있습니다.
-+ normal_test를 실행하여 일반 테스트를 실행할 수 있습니다.
-+ leak_test를 실행하여 누수 체크를 할 수 있습니다.
-+ 맵의 유효성 체크 로직은 구현에 따라 다를 수 있습니다.
-+ 해당 경우에는 직접 유효한/유효하지 않은 맵을 모아놓은 디렉토리를 따로 만드시는 것을 추천드립니다.
-+ prog_name="a.out"을 수정하여 실행파일의 위치를 지정할 수 있습니다.
+Songbird Tester is a collection of lightweight test utilities created while
+working through several projects in the 42 curriculum. The tools automate
+repetitive checks during development so that failures can be reproduced and
+inspected without repeatedly entering the same commands by hand.
+
+The repository includes utilities for comparing program output, exercising
+multiple buffer sizes, checking memory with Valgrind, sending scripted input
+and signals to Minishell, and running Cub3D parser cases.
+
+## Included Tools
+
+| Tool | Purpose |
+| --- | --- |
+| `get_next_line_tester/` | Compiles and runs Get Next Line with multiple `BUFFER_SIZE` values, compares output, checks Valgrind results, and runs Norminette |
+| `minishell_test_builder_1.5/` | Builds scripted Minishell test input and compares Bash and Minishell behavior by file descriptor |
+| `cub3d_pars_tester/` | Runs Cub3D parser cases from configurable map directories, with optional Valgrind checks |
+| `compile.sh` | Runs a small set of Push Swap cases, counts operations, invokes `checker_linux`, and checks execution with Valgrind |
+
+## Requirements
+
+The individual tools use different parts of the following environment:
+
+- Linux or a compatible shell environment
+- Bash
+- A C compiler such as `cc` or `clang`
+- GNU Make
+- Valgrind
+- Norminette for the Get Next Line style check
+- The target 42 project and its required source files
+
+Some scripts use relative paths and project-specific executable names. Review
+the configuration variables near the top or bottom of each script before
+running it.
+
+## Usage
+
+Clone the repository into or next to the target project, depending on the
+relative paths expected by the selected tester.
+
+```bash
+git clone https://github.com/hoysong/songbird_tester.git
+```
+
+### Get Next Line
+
+The Get Next Line tester expects `get_next_line.c`,
+`get_next_line_utils.c`, and `get_next_line.h` at the relative paths
+configured in its scripts.
+
+```bash
+cd get_next_line_tester
+bash run.sh
+```
+
+It compiles the implementation with `BUFFER_SIZE` values from 1 through 12,
+compares the generated output with expected files, checks Valgrind logs, and
+reports Norminette errors. Detailed mismatches are recorded in the generated
+`trace` file.
+
+### Minishell Test Builder
+
+Edit `minishell_test_builder_1.5/main.c` to define the input sequence to send
+to the target shell, then build the test program.
+
+```bash
+cd minishell_test_builder_1.5
+bash compile.sh
+./a.out
+```
+
+The test builder can compare Bash and Minishell output by file descriptor and
+can send `SIGINT` and `SIGQUIT` during scripted scenarios.
+
+### Cub3D Parser Tester
+
+Set `prog_name` and the test directories in
+`cub3d_pars_tester/test.sh`, then run:
+
+```bash
+cd cub3d_pars_tester
+bash test.sh
+```
+
+The script can run parser cases normally or through Valgrind. Map validity
+rules may differ between implementations, so the supplied cases should be
+reviewed and adjusted for the target parser.
+
+### Push Swap Quick Check
+
+The root `compile.sh` assumes a specific project layout, including
+`my_libft/libft.a`, and uses the included Linux checker.
+
+```bash
+bash compile.sh
+```
+
+Update the compiler command and test arguments when the target project uses a
+different layout.
+
+## Scope and Limitations
+
+These tools are development aids, not authoritative project validators. They
+are designed to automate frequent checks while keeping the tester itself
+small enough that work can remain focused on the main project.
+
+The Get Next Line tester does not impose an execution timeout. If a case runs
+for an unusually long time, inspect the target implementation for a possible
+infinite loop and terminate the process manually. This is an intentional scope
+limit rather than an automatic diagnosis.
+
+Test cases and expected behavior may also need adjustment for differences
+between implementations. Use an independent tester or manual verification
+when final, exhaustive validation is required.
